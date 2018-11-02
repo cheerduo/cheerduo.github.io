@@ -18,7 +18,7 @@
         
     </title>
 
-    <link rel="canonical" href="http://www.mycat-kiss.me/">
+    <link rel="canonical" href="http://www.mycat-kiss.me/tags/Linux/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -69,8 +69,8 @@
 <style type="text/css">
     header.intro-header{
         
-            background-image: url('https://www.wallpaperup.com/uploads/wallpapers/2017/07/09/1094258/00fac2df3e68ab928d9d19d3e1972c88.jpg') 
-            /*config*/
+            background-image: url('/img/header_img/archives-widget.jpg')
+            /*page*/
         
     }
     
@@ -204,90 +204,71 @@
                 post-container
             ">
             
-                <!-- Main Content -->
-
-
-<div class="post-preview">
-
-    <a href="/article/orphan-zombie/">
-        <h2 class="post-title">
-            【Linux】孤儿进程和僵尸进程
-        </h2>
-        <h3 class="post-subtitle">
+                
+<!-- Main Content -->
+<div class="container">
+    <div class="row">
+        <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+            <!-- 归档列表 -->
             
-        </h3>
-        <div class="post-content-preview">
-            1. 前言
-子进程由父进程执行fork创建而来
-子进程和父进程异步运行，即它们无法预知对方行为
-当一个进程完成它的工作exit之后，其父进程需要调用wait或者waitpid函数取得子进程的终止状态，然后内核才会将其释放，否则不仅占用内存，还会占用进程号
+            
 
-2. 孤儿进程一个父进程退出，而它的一个或多个子进程还在运行，那么那些子进程将成为孤儿进程。孤儿进程将被init进程（进程号为1）所收养......
+             <!-- 归档列表 -->
+
+            
+            <div class="one-tag-list">
+                <span class="fa fa-calendar-times-o listing-seperator" id="2018">
+                    <span class="tag-text">2018</span>
+                </span>
+                <ul>
+                
+                  <!-- <li class="listing-item">
+                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+                  </li> -->
+                 <li>
+                    01-06
+                    <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+                    <a href="/article/orphan-zombie/" style="color: #0085a1">
+                        <span>
+                            【Linux】孤儿进程和僵尸进程
+                        </span>
+                    </a>
+                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+                </li>
+                
+                </ul>
+            </div>
+            
+            <div class="one-tag-list">
+                <span class="fa fa-calendar-times-o listing-seperator" id="2017">
+                    <span class="tag-text">2017</span>
+                </span>
+                <ul>
+                
+                  <!-- <li class="listing-item">
+                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+                  </li> -->
+                 <li>
+                    08-21
+                    <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+                    <a href="/article/markdown/" style="color: #0085a1">
+                        <span>
+                            Markdown语法
+                        </span>
+                    </a>
+                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+                </li>
+                
+                </ul>
+            </div>
+            
+
+
         </div>
-    </a>
-    
-        <p class="post-meta" style="margin: 10px 0;">
-            Posted by Yao同學 on
-            2018-01-06
-        </p>
-        <div class="tags">
-            
-              <a href="/tags/#Linux" title="Linux">Linux</a>
-            
-        </div>
-    
-
+    </div>
 </div>
-<hr>
-
-<div class="post-preview">
-
-    <a href="/article/markdown/">
-        <h2 class="post-title">
-            Markdown语法
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            Markdown语法主要分为如下几大部分：标题，段落，区块引用，代码区块，强调，列表，分割线，链接，图片，反斜杠 \，符号’`’。
-I. 标题两种形式：1）使用=和-标记一级和二级标题。
-
-一级标题=========二级标题---------
-
-效果：
-
-一级标题   二级标题
-2）使用#，可表示1-6级标题。
-
-# 一级标题## 二级标题### 三级标题#### 四级标题##### 五级标......
-        </div>
-    </a>
-    
-        <p class="post-meta" style="margin: 10px 0;">
-            Posted by Yao同學 on
-            2017-08-21
-        </p>
-        <div class="tags">
-            
-              <a href="/tags/#Markdown" title="Markdown">Markdown</a>
-            
-        </div>
-    
-
-</div>
-<hr>
-
-
-
-<!-- Pager -->
-
-<ul class="pager">
-    
-    
-</ul>
-
-
 
                 <br>
 

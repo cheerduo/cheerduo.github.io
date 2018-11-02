@@ -14,11 +14,11 @@
     <script async defer src="https://buttons.github.io/buttons.js"></script>
     <title>
         
-          Yao同學 | Blog
+          【Linux】孤儿进程和僵尸进程 - Yao同學 | Blog
         
     </title>
 
-    <link rel="canonical" href="http://www.mycat-kiss.me/">
+    <link rel="canonical" href="http://www.mycat-kiss.me/article/orphan-zombie/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -69,8 +69,8 @@
 <style type="text/css">
     header.intro-header{
         
-            background-image: url('https://www.wallpaperup.com/uploads/wallpapers/2017/07/09/1094258/00fac2df3e68ab928d9d19d3e1972c88.jpg') 
-            /*config*/
+            background-image: url('/img/article_header/article_bg.jpg')
+            /*post*/
         
     }
     
@@ -83,10 +83,18 @@
             <div class="row">
                 <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
                 
-                    <div class="site-heading">
-                        <h1>Yao同學</h1>
-                        <!--<hr class="small">-->
-                        <span class="subheading">To Be Better!</span>
+                    <div class="post-heading">
+                        <div class="tags">
+                            
+                              <a class="tag" href="/tags/#Linux" title="Linux">Linux</a>
+                            
+                        </div>
+                        <h1>【Linux】孤儿进程和僵尸进程</h1>
+                        <h2 class="subheading"></h2>
+                        <span class="meta">
+                            Posted by Yao同學 on
+                            2018-01-06
+                        </span>
                     </div>
                 
 
@@ -189,226 +197,155 @@
 
 
     <!-- Main Content -->
-    <!-- Main Content -->
-<div class="container">
-    <div class="row">
-        
+    <!-- Modify by Yu-Hsuan Yen -->
 
-<!-- USE SIDEBAR -->
-    <!-- Post Container -->
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Post Container -->
             <div class="
-                col-lg-8 col-lg-offset-1
-                col-md-8 col-md-offset-1
-                col-sm-12
-                col-xs-12
-                post-container
-            ">
-            
-                <!-- Main Content -->
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
 
-
-<div class="post-preview">
-
-    <a href="/article/orphan-zombie/">
-        <h2 class="post-title">
-            【Linux】孤儿进程和僵尸进程
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            1. 前言
-子进程由父进程执行fork创建而来
-子进程和父进程异步运行，即它们无法预知对方行为
-当一个进程完成它的工作exit之后，其父进程需要调用wait或者waitpid函数取得子进程的终止状态，然后内核才会将其释放，否则不仅占用内存，还会占用进程号
-
-2. 孤儿进程一个父进程退出，而它的一个或多个子进程还在运行，那么那些子进程将成为孤儿进程。孤儿进程将被init进程（进程号为1）所收养......
-        </div>
-    </a>
-    
-        <p class="post-meta" style="margin: 10px 0;">
-            Posted by Yao同學 on
-            2018-01-06
-        </p>
-        <div class="tags">
-            
-              <a href="/tags/#Linux" title="Linux">Linux</a>
-            
-        </div>
-    
-
-</div>
-<hr>
-
-<div class="post-preview">
-
-    <a href="/article/markdown/">
-        <h2 class="post-title">
-            Markdown语法
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            Markdown语法主要分为如下几大部分：标题，段落，区块引用，代码区块，强调，列表，分割线，链接，图片，反斜杠 \，符号’`’。
-I. 标题两种形式：1）使用=和-标记一级和二级标题。
-
-一级标题=========二级标题---------
-
-效果：
-
-一级标题   二级标题
-2）使用#，可表示1-6级标题。
-
-# 一级标题## 二级标题### 三级标题#### 四级标题##### 五级标......
-        </div>
-    </a>
-    
-        <p class="post-meta" style="margin: 10px 0;">
-            Posted by Yao同學 on
-            2017-08-21
-        </p>
-        <div class="tags">
-            
-              <a href="/tags/#Markdown" title="Markdown">Markdown</a>
-            
-        </div>
-    
-
-</div>
-<hr>
-
-
-
-<!-- Pager -->
-
-<ul class="pager">
-    
-    
+                <h2 id="1-前言"><a href="#1-前言" class="headerlink" title="1. 前言"></a>1. 前言</h2><ul>
+<li>子进程由父进程执行<code>fork</code>创建而来</li>
+<li>子进程和父进程异步运行，即它们无法预知对方行为</li>
+<li>当一个进程完成它的工作<code>exit</code>之后，其父进程需要调用<code>wait</code>或者<code>waitpid</code>函数取得子进程的终止状态，然后内核才会将其释放，否则不仅占用内存，还会占用进程号</li>
+</ul>
+<h2 id="2-孤儿进程"><a href="#2-孤儿进程" class="headerlink" title="2. 孤儿进程"></a>2. 孤儿进程</h2><p>一个父进程退出，而它的一个或多个子进程还在运行，那么那些子进程将成为孤儿进程。孤儿进程将被init进程（进程号为1）所收养，并由init进程对它们完成状态收集工作。</p>
+<h2 id="3-僵尸进程"><a href="#3-僵尸进程" class="headerlink" title="3. 僵尸进程"></a>3. 僵尸进程</h2><p>子进程退出后，其进程控制块（PCB）会驻留内存，同时其退出状态会返回给操作系统，由系统发送<code>SIGCHLD</code>信号告知父进程，而父进程如果没有调用<code>wait</code>或<code>waitpid</code>获取子进程的状态信息，那么PCB仍然保存在系统中占用资源。这种进程称之为僵尸进程。</p>
+<h2 id="4-解决分析"><a href="#4-解决分析" class="headerlink" title="4. 解决分析"></a>4. 解决分析</h2><p>孤儿进程并没有危害，因为其由init接管，有理由相信其安全性。<br>而僵尸进程造成的危害上面已经简单提到过了，使用<code>ps -ef</code>或<code>ps aux</code>可发现其状态为<code>Z</code>，其实，僵尸进程是每个进程退出时必经过的状态，也是操作系统提供的能够保证父进程可获取子进程的退出信息的机制，试想一下，如果子进程退出时销毁所有信息，那么即便给父进程发信号父进程也无法再获取到子进程的任何信息了，这是不允许的。<br>但是<code>Z</code>状态仅应作为一个临时状态，父进程收到信号后应该及时处理它，否则当其大量堆积会造成危害。<br>如果发现当前已经存在大量僵尸进程了，我们可以通过kill掉父进程，使这些僵尸进程变成孤儿进程，从而被init进程接管来进一步处理它们。<br>想要避免僵尸进程的话，主要有以下两种方法：</p>
+<ul>
+<li>fork两次，然后销毁一级子进程，使二级子进程成为孤儿进程，进而被init接管</li>
+<li>父进程收到<code>SIGCHLD</code>信号后使用<code>wait</code>或<code>waitpid</code>及时处理</li>
 </ul>
 
+                
 
+                <hr>
+                <!-- Pager -->
+                <ul class="pager">
+                    
+                    
+                        <li class="next">
+                            <a href="/article/markdown/" data-toggle="tooltip" data-placement="top" title="Markdown语法">Next Post &rarr;</a>
+                        </li>
+                    
+                </ul>
 
                 <br>
-
+                
                 <!-- require APlayer -->
                 
 
-                <!-- 如果开启评论功能 -->
+                <!-- duoshuo Share start -->
+                
+                <!-- 多说 Share end-->
+
+                <!-- 多说评论框 start -->
+                
+                <!-- 多说评论框 end -->
+
+                <!-- disqus comment start -->
+                
+                <!-- disqus comment end -->
+
+                
+
+            </div>
+            
+            <!-- Tabe of Content -->
+            <!-- Table of Contents -->
+
+  
+    <style>
+      span.toc-nav-number{
+        display: none
+      }
+    </style>
+  
+    
+      <aside id="sidebar">
+        <div id="toc" class="toc-article">
+        <strong class="toc-title">Contents</strong>
+        
+          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#1-前言"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">1. 前言</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#2-孤儿进程"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">2. 孤儿进程</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#3-僵尸进程"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">3. 僵尸进程</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#4-解决分析"><span class="toc-nav-number">4.</span> <span class="toc-nav-text">4. 解决分析</span></a></li></ol>
+        
+        </div>
+      </aside>
+    
+
+                
+            <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- 已有标签 -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5><a href="/tags/">已有标签</a></h5>
+                    <div class="tags">
+                       
+                          <a class="tag" href="/tags/#Linux" title="Linux">Linux</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
                 
             </div>
-
-          <!-- Sidebar Container -->
-<div class="
-    col-lg-3 col-lg-offset-0
-    col-md-3 col-md-offset-0
-    col-sm-12
-    col-xs-12
-    sidebar-container
-">
-    
-        <!-- 已有标签 -->
-
-<section>
-    <!-- no hr -->
-    <h5><a href="/tags/">已有标签</a></h5>
-    <div class="tags">
-        
-            
-            <a href="/tags/#Linux" title="Linux" rel="1">Linux</a>
-            
-        
-            
-            <a href="/tags/#Markdown" title="Markdown" rel="1">Markdown</a>
-            
-        
+        </div>
     </div>
-</section>
+</article>
 
-        <hr>
-    
-        <!-- Short About -->
-<section class="visible-md visible-lg">
-    <h5><a href="/about/">个人主页</a></h5>
-    <div class="short-about">
 
-        
-            <img id="avatar_pic" src="/img/avatar/lover.jpg">
-        
 
-        
-            <p>The shortest answer is doing!</p>
-        
 
-        <!-- SNS Link -->
-        <ul class="list-inline">
-            
-            
-            
 
-            
-                <li>
-                    <a target="_blank" href="http://weibo.com/aiupni">
-                        <span class="fa-stack fa-lg">
-                            <i class="fa fa-circle fa-stack-2x"></i>
-                            <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
-                        </span>
-                    </a>
-                </li>
-            
 
-            
 
-            
-                <li>
-                    <a target="_blank" href="https://github.com/cheerduo">
-                        <span class="fa-stack fa-lg">
-                            <i class="fa fa-circle fa-stack-2x"></i>
-                            <i class="fa fa-github fa-stack-1x fa-inverse"></i>
-                        </span>
-                    </a>
-                </li>
-            
-            
-            
-            
-        </ul>
-    </div>
-</section>
 
-        <hr>
-    
-        
-  <h5>最近博文</h5>
-  <div class="widget">
-    <ul>
-      
-        <li>
-          <a href="/article/orphan-zombie/">【Linux】孤儿进程和僵尸进程</a>
-        </li>
-      
-        <li>
-          <a href="/article/markdown/">Markdown语法</a>
-        </li>
-      
-    </ul>
-  </div>
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'hover',
+          placement: 'left',
+          icon: 'ℬ'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
 
-        <hr>
-    
-        
-    <h5>归档列表</h5>
-    <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">一月 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">八月 2017</a><span class="archive-list-count">1</span></li></ul>
-    </div>
-
-        <hr>
-    
-</div>
-
-        
-    </div>
-</div>
 
 
     <!-- Footer -->
